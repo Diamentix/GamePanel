@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { shareReplay, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CategoriesResponse, GameCategory } from '../common/interface';
 
 const urlREST = 'https://staging-frontapi.cherrytech.com/';
 const httpParams = {
@@ -10,28 +11,11 @@ const httpParams = {
 }
 const CACHE_SIZE = 1;
 
-export interface CategoriesResponse {
-  _links: Object,
-  _embedded: EmbeddedCategories,
-  total_items: number
-}
-
-export interface EmbeddedCategories {
-  game_categories: Array<GameCategories>
-}
-
-export interface GameCategories {
-  name: string,
-  order: number,
-  slug: string,
-
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class RESTGameDataServiceService {
-  private cache$: Observable<any>;
+  private cache$: Observable<GameCategory[]>;
 
   constructor(private http: HttpClient) { }
 
@@ -42,7 +26,10 @@ export class RESTGameDataServiceService {
 
   public getRestAPIGameCategoriesData() {
     const gameCategories = 'game-categories'
-    return this.http.get(`${urlREST}${gameCategories}`, {params: httpParams});
+    return this.http.get<CategoriesResponse>(`${urlREST}${gameCategories}`, {params: httpParams})
+    .pipe(
+      map(response => response._embedded.game_categories)
+    )
   }
 
   get gameCategories() {

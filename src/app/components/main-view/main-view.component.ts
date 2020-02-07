@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 
 import { QLGameDataService } from '../../services/game-data.service';
 import { RESTGameDataServiceService } from '../../services/restgame-data-service.service';
+import { GameCategory, Game } from '../../common/interface';
 
 @Component({
   selector: 'app-main-view',
@@ -16,7 +17,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
   lobby: any;
   gamesListQL: any[];
   loading = true;
-  popularGamesList: any[];
+  popularGamesList: Game[];
   popLoading = true;
 
   private queryQLSubscription: Subscription;
@@ -46,7 +47,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
     this.gameCatSub = this.gameDataREST.gameCategories
     .subscribe( result => {
       console.log('categories: ', result);
-      this.popularGamesList = result._embedded.game_categories[0]._embedded.games;
+      this.popularGamesList = result[5]._embedded.games;
       console.log('popularGames: ', this.popularGamesList);
     });
   }
