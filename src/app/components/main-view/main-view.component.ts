@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 
 import { QLGameDataService } from '../../services/game-data.service';
 import { RESTGameDataServiceService } from '../../services/restgame-data-service.service';
+
 import { GameCategory, Game } from '../../common/interface';
 
 @Component({
