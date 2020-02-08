@@ -29,6 +29,7 @@ const appRoutes: Routes = [
   { path: 'home', component: MainViewComponent},
   { path: 'mobile', component: MobileComponent},
   { path: 'popular', component: PopularGamesComponent},
+  { path: 'popular-games', component: PopularGamesComponent},
   { path: '**', component: MainViewComponent }
 ];
 
