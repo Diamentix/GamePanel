@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subscription, combineLatest } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { QLGameDataService } from '../../services/game-data.service';
 import { RESTGameDataService} from '../../services/restgame-data.service';
@@ -20,46 +21,38 @@ export class MainViewComponent implements OnInit, OnDestroy {
   loading = true;
   gameList: Game[];
   popLoading = true;
+  reactiveForm = new FormGroup({
+    filterName: new FormControl()
+  },
+  {
+    updateOn: 'submit'
+  });
 
   private queryQLSubscription: Subscription;
   private queryRESTSubscription: Subscription;
   private gameCatSub: Subscription;
+  private formSub: Subscription;
 
   constructor(private gameDataQL: QLGameDataService, private gameDataREST: RESTGameDataService) { }
 
   ngOnInit() {
-
-    // this.queryQLSubscription = this.gameDataQL.getGameCategories()
-    // .subscribe(({
-    //   data, loading
-    // }) => {
-    //   this.loading = loading;
-    //   this.lobby = data;
-    //   this.gamesListQL = data.lobby.games;
-    //   console.log('lobby: ', this.lobby);
-    //   console.log('gamesList: ', this.gamesListQL);
-    // });
-
-    this.queryRESTSubscription = this.gameDataREST.games
-    .subscribe( result => {
-      console.log('result: ', result);
-      this.gameList = result;
-    });
-
-    console.log('restSub: ', this.queryRESTSubscription);
-
-    // this.gameCatSub = this.gameDataREST.gameCategories
-    // .subscribe( result => {
-    //   console.log('categories: ', result);
-    //   this.popularGamesList = result[5]._embedded.games;
-    //   console.log('popularGames: ', this.popularGamesList);
-    // });
+    this.queryRESTSubscription = combineLatest([this.reactiveForm.get("filterName").valueChanges
+    .pipe(startWith('')), this.gameDataREST.games])
+      .pipe(
+        map((params) => {
+          let formsObj = params[0] as any;
+          let filterValue = formsObj.toLowerCase();
+          let gameArr = params[1] as any;
+          let filteredGameList = filterValue ? gameArr.filter(game => game.name.toLowerCase().includes(filterValue)) : gameArr ;
+          return filteredGameList;
+        })
+      )
+      .subscribe(result => {
+        this.gameList = result;
+      });
   }
 
   ngOnDestroy() {
-    // this.queryQLSubscription.unsubscribe();
     this.queryRESTSubscription.unsubscribe();
-    // this.gameCatSub.unsubscribe();
   }
-
 }

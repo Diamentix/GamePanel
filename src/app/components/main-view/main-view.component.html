@@ -2,7 +2,9 @@
 <div class="pageContainer">
     <div class="pageHeader">
         <h1>Welcome to our playground!</h1>
-        <input placeholder="Search...">
+        <form [formGroup]="reactiveForm" novalidate>
+            <input type="text" id="filterName" name="filterName" formControlName="filterName" placeholder="Search...">
+        </form>
     </div>
     <div class="gameContainer">
         <mat-grid-list cols="4" rowHeight="4:3" gutterSize="0px">
