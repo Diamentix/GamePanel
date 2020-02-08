@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { RESTGameDataService } from '../../services/restgame-data.service';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { GameCategory, Game } from '../../common/interface';
+
 
 @Component({
   selector: 'app-category-view',
@@ -7,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
   }
