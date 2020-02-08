@@ -20,7 +20,7 @@ export class RESTGameDataService {
 
   constructor(private http: HttpClient) { }
 
-  public getRestAPIGamesData() {
+  private getRestAPIGamesData() {
     const games = 'games';
     return this.http.get<GamesResponse>(`${urlREST}${games}`, {params: httpParams})
     .pipe(
@@ -28,7 +28,7 @@ export class RESTGameDataService {
     );
   }
 
-  public getRestAPIGameCategoriesData() {
+  private getRestAPIGameCategoriesData() {
     const gameCategories = 'game-categories'
     return this.http.get<CategoriesResponse>(`${urlREST}${gameCategories}`, {params: httpParams})
     .pipe(

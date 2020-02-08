@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CategoryListComponent } from './category-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RESTGameDataService } from '../../services/restgame-data.service';
 
 describe('CategoryListComponent', () => {
   let component: CategoryListComponent;
@@ -8,7 +10,9 @@ describe('CategoryListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoryListComponent ]
+      declarations: [ CategoryListComponent ],
+      imports: [ HttpClientModule ],
+      providers: [ RESTGameDataService ]
     })
     .compileComponents();
   }));

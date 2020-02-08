@@ -1,12 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RESTGameDataServiceService } from './restgame-data-service.service';
+import { RESTGameDataService } from './restgame-data.service';
+import { HttpClientModule } from '@angular/common/http';
 
-describe('RESTGameDataServiceService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+describe('RESTGameDataService', () => {
+  beforeEach(async() => TestBed.configureTestingModule({
+    imports: [HttpClientModule],
+    providers: [RESTGameDataService]
+  }));
 
   it('should be created', () => {
-    const service: RESTGameDataServiceService = TestBed.get(RESTGameDataServiceService);
+    const service: RESTGameDataService = TestBed.get(RESTGameDataService);
     expect(service).toBeTruthy();
   });
 });
