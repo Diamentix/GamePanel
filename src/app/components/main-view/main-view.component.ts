@@ -3,14 +3,15 @@ import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { QLGameDataService } from '../../services/game-data.service';
-import { RESTGameDataServiceService } from '../../services/restgame-data-service.service';
+import { RESTGameDataService} from '../../services/restgame-data.service';
+
 import { GameCategory, Game } from '../../common/interface';
 
 @Component({
   selector: 'app-main-view',
   templateUrl: './main-view.component.html',
   styleUrls: ['./main-view.component.scss'],
-  providers: [QLGameDataService, RESTGameDataServiceService]
+  providers: [QLGameDataService, RESTGameDataService]
 })
 export class MainViewComponent implements OnInit, OnDestroy {
 
@@ -24,7 +25,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
   private queryRESTSubscription: Subscription;
   private gameCatSub: Subscription;
 
-  constructor(private gameDataQL: QLGameDataService, private gameDataREST: RESTGameDataServiceService) { }
+  constructor(private gameDataQL: QLGameDataService, private gameDataREST: RESTGameDataService) { }
 
   ngOnInit() {
 

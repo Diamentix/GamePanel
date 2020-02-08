@@ -14,7 +14,7 @@ const CACHE_SIZE = 1;
 @Injectable({
   providedIn: 'root'
 })
-export class RESTGameDataServiceService {
+export class RESTGameDataService {
   private cache$: Observable<GameCategory[]>;
 
   constructor(private http: HttpClient) { }

@@ -1,7 +1,5 @@
+<app-navbar-component></app-navbar-component>
 
-<div *ngIf="loading">
-    Fetching data...
-</div>
 <div *ngIf="gamesListQL" class="thumbnailDisplay">
     <div *ngFor="let game of gamesListQL">
         <img [src] = "game.thumbnail" aria-placeholder="game.name" alt="{{game.name}}" title="{{game.name}} &#013;{{game.description}}" height="{{game.height}}" width="{{game.width}}" onerror="this.onerror=null;this.src='assets/noimagefound.png';"/>
@@ -9,12 +7,10 @@
 </div>
 
 
-
-<!-- <div *ngIf="loading">
-    Fetching data for Popular Games...
-</div> -->
 <div *ngIf="gamesListQL" class="thumbnailDisplay">
     <div *ngFor="let game of popularGamesList">
-        <img [src] = "game.thumbnail" aria-placeholder="game.name" alt="{{game.name}}" title="{{game.name}} &#013;{{game.description}}" height="{{game.height}}" width="{{game.width}}" onerror="this.onerror=null;this.src='assets/noimagefound.png';"/>
+        <a target="_blank" rel="noopener noreferrer" href="{{game.url}}">
+            <img [src] = "game.thumbnail" aria-placeholder="game.name" alt="{{game.name}}" title="{{game.name}} &#013;{{game.description}}" height="{{game.height}}" width="{{game.width}}" onerror="this.onerror=null;this.src='assets/noimagefound.png';"/>
+        </a>
     </div>
 </div>
