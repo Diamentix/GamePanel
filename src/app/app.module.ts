@@ -21,7 +21,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MobileComponent } from './components/mobile/mobile.component';
 import { AboutComponent } from './components/about/about.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
-import { PopularGamesComponent } from './components/popular-games/popular-games.component';
 
 
 const appRoutes: Routes = [
