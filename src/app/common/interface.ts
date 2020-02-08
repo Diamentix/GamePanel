@@ -51,3 +51,12 @@ export interface CategoriesResponse {
     login_required: boolean,
     _links: any
   }
+
+  export interface GamesResponse {
+    _links: any,
+    _embedded: EmbeddedGames,
+    page_count: number,
+    page_size: number,
+    total_items: number,
+    page: number
+  }

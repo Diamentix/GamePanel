@@ -1,1 +1,14 @@
-<p>category-list works!</p>
+
+<div class="pageContainer">
+    <div class="pageHeader">
+        <h1>CATEGORIES</h1>
+    </div>
+    <div class="gameContainer">
+        <mat-action-list>
+            <div *ngFor="let category of gameCategories">
+                <button mat-button [routerLink]="['/category', category.slug]"> {{category.name}} </button>
+            </div>
+        </mat-action-list>
+    </div>
+</div>
+

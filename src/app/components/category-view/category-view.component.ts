@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { RESTGameDataService } from '../../services/restgame-data.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GameCategory, Game } from '../../common/interface';
 
@@ -14,9 +14,35 @@ import { GameCategory, Game } from '../../common/interface';
 })
 export class CategoryViewComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  name: string;
+  slug: string;
+  gameList: Game[];
+  private dataSub: Subscription;
+
+  constructor(private route: ActivatedRoute, private dataService: RESTGameDataService) { }
 
   ngOnInit() {
+
+    this.dataSub = combineLatest([this.route.paramMap, this.dataService.gameCategories])
+      .pipe(
+        map((params) => {
+          let paramMap = params[0] as any;
+          let slug = paramMap.params.slug;
+          let catArray = params[1] as any;
+          let category = catArray.find(cat => cat.slug === slug);
+          return category;
+        })
+      )
+      .subscribe( result => {
+          this.name = result.name;
+          this.gameList = result._embedded.games;
+        }
+      );
+
+  }
+
+  ngOnDestroy(): void {
+    this.dataSub.unsubscribe();
   }
 
 }

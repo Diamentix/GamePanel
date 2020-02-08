@@ -19,6 +19,8 @@ export class CategoryListComponent implements OnInit, OnDestroy {
     this.dataSubscription = this.dataService.gameCategories
     .subscribe( result => {
       console.log('categories: ', result);
+      this.gameCategories = result;
+      console.log('slug: ', result[0].slug);
     });
   }
 
