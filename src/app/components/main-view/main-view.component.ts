@@ -16,11 +16,7 @@ import { GameCategory, Game } from '../../common/interface';
 })
 export class MainViewComponent implements OnInit, OnDestroy {
 
-  lobby: any;
-  gamesListQL: any[];
-  loading = true;
   gameList: Game[];
-  popLoading = true;
   reactiveForm = new FormGroup({
     filterName: new FormControl()
   },
@@ -33,7 +29,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
   private gameCatSub: Subscription;
   private formSub: Subscription;
 
-  constructor(private gameDataQL: QLGameDataService, private gameDataREST: RESTGameDataService) { }
+  constructor(private gameDataREST: RESTGameDataService) { }
 
   ngOnInit() {
     this.queryRESTSubscription = combineLatest([this.reactiveForm.get("filterName").valueChanges

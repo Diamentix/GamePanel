@@ -4,7 +4,51 @@
         <h1>ABOUT</h1>
     </div>
     <div class="gameContainer">
-        
+        <p>
+            Hey!
+            This is my small project which simulates a browser games' website.
+            <br>
+            I've built it with the help of: 
+        </p>
+        <ul>
+            <li> Angular 9</li>
+            <li> Angular Material </li>
+            <li> RxJS </li>
+            <li> REST API </li>
+            <li> GraphQL </li>
+            <li> Apollo Client (GQL for Angular) </li>
+            <li> Lots of energy drinks (did it all in less than 24h of work, special thanks <a target="_blank" rel="noopener noreferrer" href="https://www.monsterenergy.com/pl/pl/products/juice-monster/mango-loco">here</a>) </li>
+            <li> Some hope </li>
+        </ul>
+        <p>
+            As for a small quickstart for this website's navigation:
+        </p>
+        <ol>
+            <li> The Homepage contains a list of ALL games available within the service. <br>
+                There is also a searchbar (triggered on submit) to ease Your burden while looking for anything specific. </li>
+            <li>
+                The Categories page contains a list of available categories from which You can select the one that suits You best, 
+                <br>
+                which then redirects You to the chosen category page with all it's games.
+            </li>
+            <li>
+                The games' images contain an attached URL by default, however as it's a simulation - <br>
+                 the URLs are empty, thus once clicked on an image - the browser will open a new tab to the homepage.
+            </li>
+            <li>
+                The Mobile page is implemented with the use of GraphQL through Apollo Client.
+                <br>
+                <img src="assets/notmuch.png" height="150px" width="auto"> 
+            </li>
+            <li>
+                There is Routing implemented with params to determine correct category combined with routerLinks in navbar. <br>
+                (You can also type ex. localhost:port/category/popular-games directly into the browser)
+            </li>
+            <li>
+                The games are listed with the use of mat-action-list, but as there are some missing resources - <br>
+                in some cases the arrangement might slightly differ due to the missing images.
+            </li>
+        </ol>
     </div>
 </div>
 
