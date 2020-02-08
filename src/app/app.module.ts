@@ -18,14 +18,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MobileComponent } from './components/mobile/mobile.component';
 import { AboutComponent } from './components/about/about.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
+import { PopularGamesComponent } from './components/popular-games/popular-games.component';
 
 
 const appRoutes: Routes = [
   { path: 'category/:slug', component: CategoryViewComponent},
+  { path: 'about', component: AboutComponent},
   { path: 'category', component: CategoryListComponent},
   { path: 'categories', component: CategoryListComponent},
+  { path: 'home', component: MainViewComponent},
   { path: 'mobile', component: MobileComponent},
-  { path: 'about', component: AboutComponent},
+  { path: 'popular', component: PopularGamesComponent},
   { path: '**', component: MainViewComponent }
 ];
 
