@@ -22,7 +22,6 @@ export class MobileComponent implements OnInit {
     }) => {
       this.loading = loading;
       this.gamesListQL = data.lobby.games;
-      console.log('gamesList: ', this.gamesListQL);
     });
   }
 
