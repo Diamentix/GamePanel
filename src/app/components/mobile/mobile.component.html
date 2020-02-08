@@ -1,1 +1,17 @@
-<p>mobile works!</p>
+
+<div class="pageContainer">
+    <div class="pageHeader">
+        <h1>MOBILE</h1>
+    </div>
+    <div class="gameContainer">
+        <mat-grid-list cols="4" rowHeight="4:3" gutterSize="0px">
+            <mat-grid-tile *ngFor="let game of gamesListQL">
+                    <a target="_blank" rel="noopener noreferrer" href="{{game.url}}">
+                        <img [src] = "game.thumbnail" aria-placeholder="game.name" alt="{{game.name}}" title="{{game.name}} &#013;{{game.description}}" />
+                    </a>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>
+
+

@@ -1,16 +1,18 @@
-<app-navbar-component></app-navbar-component>
 
-<div *ngIf="gamesListQL" class="thumbnailDisplay">
-    <div *ngFor="let game of gamesListQL">
-        <img [src] = "game.thumbnail" aria-placeholder="game.name" alt="{{game.name}}" title="{{game.name}} &#013;{{game.description}}" height="{{game.height}}" width="{{game.width}}" onerror="this.onerror=null;this.src='assets/noimagefound.png';"/>
+<div class="pageContainer">
+    <div class="pageHeader">
+        <h1>Welcome to our playground!</h1>
+        <input placeholder="Search...">
+    </div>
+    <div class="gameContainer">
+        <mat-grid-list cols="4" rowHeight="4:3" gutterSize="0px">
+            <mat-grid-tile *ngFor="let game of gameList">
+                    <a target="_blank" rel="noopener noreferrer" href="{{game.url}}">
+                        <img [src] = "game.thumbnail" aria-placeholder="game.name" alt="{{game.name}}" title="{{game.name}} &#013;{{game.description}}" />
+                    </a>
+            </mat-grid-tile>
+        </mat-grid-list>
     </div>
 </div>
 
 
-<div *ngIf="gamesListQL" class="thumbnailDisplay">
-    <div *ngFor="let game of popularGamesList">
-        <a target="_blank" rel="noopener noreferrer" href="{{game.url}}">
-            <img [src] = "game.thumbnail" aria-placeholder="game.name" alt="{{game.name}}" title="{{game.name}} &#013;{{game.description}}" height="{{game.height}}" width="{{game.width}}" onerror="this.onerror=null;this.src='assets/noimagefound.png';"/>
-        </a>
-    </div>
-</div>

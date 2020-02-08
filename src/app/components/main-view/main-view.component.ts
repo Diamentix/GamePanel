@@ -18,7 +18,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
   lobby: any;
   gamesListQL: any[];
   loading = true;
-  popularGamesList: Game[];
+  gameList: Game[];
   popLoading = true;
 
   private queryQLSubscription: Subscription;
@@ -29,34 +29,37 @@ export class MainViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.queryQLSubscription = this.gameDataQL.getGameCategories()
-    .subscribe(({
-      data, loading
-    }) => {
-      this.loading = loading;
-      this.lobby = data;
-      this.gamesListQL = data.lobby.games;
-      console.log('lobby: ', this.lobby);
-      console.log('gamesList: ', this.gamesListQL);
-    });
+    // this.queryQLSubscription = this.gameDataQL.getGameCategories()
+    // .subscribe(({
+    //   data, loading
+    // }) => {
+    //   this.loading = loading;
+    //   this.lobby = data;
+    //   this.gamesListQL = data.lobby.games;
+    //   console.log('lobby: ', this.lobby);
+    //   console.log('gamesList: ', this.gamesListQL);
+    // });
 
-    this.queryRESTSubscription = this.gameDataREST.getRestAPIGamesData()
+    this.queryRESTSubscription = this.gameDataREST.games
     .subscribe( result => {
       console.log('result: ', result);
+      this.gameList = result;
     });
 
-    this.gameCatSub = this.gameDataREST.gameCategories
-    .subscribe( result => {
-      console.log('categories: ', result);
-      this.popularGamesList = result[5]._embedded.games;
-      console.log('popularGames: ', this.popularGamesList);
-    });
+    console.log('restSub: ', this.queryRESTSubscription);
+
+    // this.gameCatSub = this.gameDataREST.gameCategories
+    // .subscribe( result => {
+    //   console.log('categories: ', result);
+    //   this.popularGamesList = result[5]._embedded.games;
+    //   console.log('popularGames: ', this.popularGamesList);
+    // });
   }
 
   ngOnDestroy() {
-    this.queryQLSubscription.unsubscribe();
+    // this.queryQLSubscription.unsubscribe();
     this.queryRESTSubscription.unsubscribe();
-    this.gameCatSub.unsubscribe();
+    // this.gameCatSub.unsubscribe();
   }
 
 }
